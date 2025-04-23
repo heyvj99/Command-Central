@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <motion.header
-      className="flex items-center justify-between p-4 bg-background border-b"
+      className="flex items-center justify-between p-4 bg-background "
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -30,7 +30,6 @@ const Header = () => {
         animate={{ x: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <img src={logo} alt="Command Central Logo" className="w-fit" />
       </motion.div>
 
       <div className="flex items-center gap-4">
