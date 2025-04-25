@@ -12,17 +12,24 @@ interface IncidentCardListProps {
 export function IncidentCardList({
   incidents,
   onCardClick,
-  className
+  className,
 }: IncidentCardListProps) {
   const [sortBy, setSortBy] = useState<"time" | "severity">("time");
-  const [filterBySeverity, setFilterBySeverity] = useState<"All" | "High" | "Medium" | "Low">("All");
+  const [filterBySeverity, setFilterBySeverity] = useState<
+    "All" | "High" | "Medium" | "Low"
+  >("All");
 
   // Sort and filter incidents
   const filteredAndSortedIncidents = incidents
-    .filter(incident => filterBySeverity === "All" || incident.severity === filterBySeverity)
+    .filter(
+      (incident) =>
+        filterBySeverity === "All" || incident.severity === filterBySeverity
+    )
     .sort((a, b) => {
       if (sortBy === "time") {
-        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+        return (
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        );
       } else {
         const severityOrder = { High: 3, Medium: 2, Low: 1 };
         return severityOrder[b.severity] - severityOrder[a.severity];
@@ -30,9 +37,9 @@ export function IncidentCardList({
     });
 
   return (
-    <div className={className}>
+    <div className="flex flex-col h-full">
       {/* Controls */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 shrink-0">
         <div className="flex items-center gap-4">
           <select
             className="px-3 py-1 border rounded-md bg-background text-sm"
@@ -45,7 +52,11 @@ export function IncidentCardList({
           <select
             className="px-3 py-1 border rounded-md bg-background text-sm"
             value={filterBySeverity}
-            onChange={(e) => setFilterBySeverity(e.target.value as "All" | "High" | "Medium" | "Low")}
+            onChange={(e) =>
+              setFilterBySeverity(
+                e.target.value as "All" | "High" | "Medium" | "Low"
+              )
+            }
           >
             <option value="All">All Severities</option>
             <option value="High">High Severity</option>
@@ -59,10 +70,7 @@ export function IncidentCardList({
       </div>
 
       {/* Cards */}
-      <motion.div
-        className="grid gap-4"
-        layout
-      >
+      <motion.div className="flex-1 grid gap-4 overflow-y-auto min-h-0" layout>
         {filteredAndSortedIncidents.map((incident) => (
           <motion.div
             key={incident.id}
@@ -97,4 +105,4 @@ export function IncidentCardList({
       )}
     </div>
   );
-} 
+}
