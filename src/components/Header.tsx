@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Settings, Bell, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
