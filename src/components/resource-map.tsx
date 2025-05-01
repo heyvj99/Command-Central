@@ -93,7 +93,7 @@ export function ResourceMap({ selectedResources }: ResourceMapProps) {
           <div
             key={`${resource.type}-${index}`}
             className={cn(
-              "absolute w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300",
+              "absolute w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300",
               isHighlighted ? "opacity-100" : "opacity-20",
               {
                 "bg-blue-700": resource.type === "stations",
