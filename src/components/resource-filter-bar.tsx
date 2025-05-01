@@ -75,15 +75,15 @@ export function ResourceFilterBar({
                 "flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
                 isSelected
                   ? {
-                      "bg-blue-500 text-white": resource.type === "stations",
-                      "bg-red-500 text-white": resource.type === "fireTrucks",
-                      "bg-orange-500 text-white":
+                      "bg-blue-700 text-white": resource.type === "stations",
+                      "bg-red-900 text-white": resource.type === "fireTrucks",
+                      "bg-orange-700 text-white":
                         resource.type === "fireEngines",
-                      "bg-purple-500 text-white":
+                      "bg-purple-800 text-white":
                         resource.type === "battalions",
-                      "bg-green-500 text-white":
+                      "bg-green-800 text-white":
                         resource.type === "ladderTrucks",
-                      "bg-cyan-500 text-white":
+                      "bg-cyan-600 text-white":
                         resource.type === "waterTankers",
                     }
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
