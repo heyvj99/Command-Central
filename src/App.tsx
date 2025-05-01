@@ -4,14 +4,30 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { IncidentCardList } from "@/components/incident-card-list";
 import { mockIncidents } from "@/data/mock-incidents";
-import {
-  ResourceFilterBar,
-  type ResourceType,
-} from "@/components/resource-filter-bar";
+import { ResourceFilterBar } from "@/components/resource-filter-bar";
+import { ResourceMap } from "@/components/resource-map";
+import { useState } from "react";
+import { ResourceType } from "@/types/resource";
 
 function App() {
+  const [selectedResources, setSelectedResources] = useState<ResourceType[]>(
+    []
+  );
+
   const handleResourceFilter = (filter: ResourceType) => {
-    console.log("Selected resource filter:", filter);
+    setSelectedResources((prev) => {
+      if (prev.includes(filter)) {
+        // If the filter is already selected, remove it
+        return prev.filter((resource) => resource !== filter);
+      } else {
+        // If the filter is not selected, add it
+        return [...prev, filter];
+      }
+    });
+  };
+
+  const handleClearAll = () => {
+    setSelectedResources([]);
   };
 
   return (
@@ -41,8 +57,14 @@ function App() {
             </div>
             {/* the rest 60% is the maps and the resources. */}
             <div className="flex-1 min-w-0">
-              <ResourceFilterBar onFilterChange={handleResourceFilter} />
-              <div className="Image w-full h-full bg-amber-100"> </div>
+              <ResourceFilterBar
+                onFilterChange={handleResourceFilter}
+                selectedResources={selectedResources}
+                onClearAll={handleClearAll}
+              />
+              <div className="Image-map w-full h-full bg-grey-50">
+                <ResourceMap selectedResources={selectedResources} />
+              </div>
             </div>
           </div>
         </div>
