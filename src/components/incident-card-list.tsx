@@ -12,6 +12,7 @@ interface IncidentCardListProps {
 export function IncidentCardList({
   incidents,
   onCardClick,
+  className,
 }: IncidentCardListProps) {
   const [sortBy, setSortBy] = useState<"time" | "severity">("time");
   const [filterBySeverity, setFilterBySeverity] = useState<

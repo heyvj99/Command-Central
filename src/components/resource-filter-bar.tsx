@@ -15,37 +15,37 @@ const resources = [
     type: "stations" as ResourceType,
     label: "Stations",
     icon: Building2,
-    count: 12,
+    count: 6,
   },
   {
     type: "fireTrucks" as ResourceType,
     label: "Fire Trucks",
     icon: Triangle,
-    count: 8,
+    count: 6,
   },
   {
     type: "fireEngines" as ResourceType,
     label: "Fire Engines",
     icon: Square,
-    count: 15,
+    count: 7,
   },
   {
     type: "battalions" as ResourceType,
     label: "Battalions",
     icon: Star,
-    count: 4,
+    count: 5,
   },
   {
     type: "ladderTrucks" as ResourceType,
     label: "Ladder Trucks",
     icon: ArrowUpDown,
-    count: 6,
+    count: 3,
   },
   {
     type: "waterTankers" as ResourceType,
     label: "Water Tankers",
     icon: Droplets,
-    count: 10,
+    count: 5,
   },
 ];
 
