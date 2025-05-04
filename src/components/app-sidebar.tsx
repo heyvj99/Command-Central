@@ -63,7 +63,7 @@ export function AppSidebar() {
                           "w-full flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted transition-colors",
                           isActive
                             ? "bg-muted font-semibold text-primary"
-                            : "text-muted-foreground"
+                            : "grey-500"
                         )}
                       >
                         <item.icon className="h-4 w-4" />
