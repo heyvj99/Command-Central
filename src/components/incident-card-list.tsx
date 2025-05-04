@@ -70,7 +70,10 @@ export function IncidentCardList({
       </div>
 
       {/* Cards */}
-      <motion.div className="flex-1 grid gap-4 overflow-y-auto min-h-0" layout>
+      <motion.div
+        className="flex-1 grid gap-4 overflow-y-scroll min-h-0"
+        layout
+      >
         {filteredAndSortedIncidents.map((incident) => (
           <motion.div
             key={incident.id}

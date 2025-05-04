@@ -30,9 +30,9 @@ function Incidents() {
     <>
       {/* main container below the header */}
 
-      <div className="container mx-auto p-4 flex justify-start flex-row overflow-hidden">
+      <div className="content-container h-[100%] mx-auto p-4 flex justify-start flex-row overflow-hidden flex-1">
         {/* 40% of the main container is the cards list */}
-        <div className="p-4 w-[40%] h-full overflow-y-hidden">
+        <div className="p-4 w-[40%] h-[100%] overflow-y-hidden">
           <IncidentCardList
             incidents={mockIncidents}
             onCardClick={(incident) =>
@@ -41,13 +41,13 @@ function Incidents() {
           />
         </div>
         {/* the rest 60% is the maps and the resources. */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 h-[100%] flex flex-col">
           <ResourceFilterBar
             onFilterChange={handleResourceFilter}
             selectedResources={selectedResources}
             onClearAll={handleClearAll}
           />
-          <div className="Image-map w-full h-full bg-grey-50">
+          <div className="Image-map w-full flex-1 bg-grey-50">
             <ResourceMap selectedResources={selectedResources} />
           </div>
         </div>
