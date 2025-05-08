@@ -73,7 +73,8 @@ export default function MetricCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Strong user retention <TrendingUpIcon className="size-4" />
+            Resources Dispatched{" "}
+            <TrendingUpIcon className="size-4" color="green" />
           </div>
           <div className="text-muted-foreground">Engagement exceed targets</div>
         </CardFooter>
