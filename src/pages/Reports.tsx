@@ -62,9 +62,9 @@ export default function Reports() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 flex flex-col h-full">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center shrink-0">
         <h1 className="text-2xl font-bold">Reports</h1>
         <div className="flex items-center gap-2">
           <Button
@@ -85,7 +85,7 @@ export default function Reports() {
       </div>
 
       {/* Filters */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 shrink-0 mt-6">
         <select
           className="px-3 py-1.5 border rounded-md bg-background text-sm"
           value={selectedType}
@@ -110,141 +110,151 @@ export default function Reports() {
       </div>
 
       {/* Content */}
-      <AnimatePresence mode="wait">
-        {viewMode === "grid" ? (
-          <motion.div
-            key="grid"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-          >
-            {filteredReports.map((report) => (
-              <motion.div key={report.id} variants={itemVariants} layout>
-                <Card className="p-4 hover:shadow-md transition-shadow">
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-semibold">{report.title}</h3>
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={cn(
-                            "w-2 h-2 rounded-full",
-                            getStatusColor(report.status)
-                          )}
-                        />
-                        <span className="text-sm text-muted-foreground">
-                          {report.status}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      {report.description}
-                    </p>
-                    <div className="flex justify-between items-center text-sm">
-                      <span
-                        className={cn(
-                          "px-2 py-1 rounded-full",
-                          getTypeStyles(report.type)
-                        )}
-                      >
-                        {report.type}
-                      </span>
-                      <span className="text-muted-foreground">
-                        {report.createdAt}
-                      </span>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        ) : (
-          <motion.div
-            key="table"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="border rounded-lg"
-          >
-            <table className="w-full">
-              <thead>
-                <tr className="border-b bg-muted/50">
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Title
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Status
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Created By
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Created At
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Last Modified
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredReports.map((report) => (
-                  <motion.tr
-                    key={report.id}
-                    variants={itemVariants}
-                    layout
-                    className="border-b hover:bg-muted/50"
-                  >
-                    <td className="px-4 py-3">
-                      <div>
-                        <div className="font-medium">{report.title}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {report.description}
+      <div className="mt-6 flex-1 min-h-0 overflow-hidden">
+        <AnimatePresence mode="wait">
+          {viewMode === "grid" ? (
+            <motion.div
+              key="grid"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-full overflow-y-auto pr-2"
+            >
+              {filteredReports.map((report) => (
+                <motion.div key={report.id} variants={itemVariants} layout>
+                  <Card className="p-4 hover:shadow-md transition-shadow">
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-semibold">{report.title}</h3>
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={cn(
+                              "w-2 h-2 rounded-full",
+                              getStatusColor(report.status)
+                            )}
+                          />
+                          <span className="text-sm text-muted-foreground">
+                            {report.status}
+                          </span>
                         </div>
                       </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={cn(
-                          "px-2 py-1 rounded-full text-xs",
-                          getTypeStyles(report.type)
-                        )}
-                      >
-                        {report.type}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-1.5">
+                      <p className="text-sm text-muted-foreground">
+                        {report.description}
+                      </p>
+                      <div className="flex justify-between items-center text-sm">
                         <span
                           className={cn(
-                            "w-2 h-2 rounded-full",
-                            getStatusColor(report.status)
+                            "px-2 py-1 rounded-full",
+                            getTypeStyles(report.type)
                           )}
-                        />
-                        <span className="text-sm text-muted-foreground">
-                          {report.status}
+                        >
+                          {report.type}
+                        </span>
+                        <span className="text-muted-foreground">
+                          {report.createdAt}
                         </span>
                       </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">{report.createdBy}</td>
-                    <td className="px-4 py-3 text-sm">{report.createdAt}</td>
-                    <td className="px-4 py-3 text-sm">{report.lastModified}</td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="table"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="border rounded-lg h-full overflow-hidden flex flex-col"
+            >
+              <div className="overflow-y-auto">
+                <table className="w-full">
+                  <thead className="sticky top-0 bg-muted/50 z-10">
+                    <tr className="border-b">
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Title
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Type
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Status
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Created By
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Created At
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">
+                        Last Modified
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredReports.map((report) => (
+                      <motion.tr
+                        key={report.id}
+                        variants={itemVariants}
+                        layout
+                        className="border-b hover:bg-muted/50"
+                      >
+                        <td className="px-4 py-3">
+                          <div>
+                            <div className="font-medium">{report.title}</div>
+                            <div className="text-sm text-muted-foreground">
+                              {report.description}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={cn(
+                              "px-2 py-1 rounded-full text-xs",
+                              getTypeStyles(report.type)
+                            )}
+                          >
+                            {report.type}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-1.5">
+                            <span
+                              className={cn(
+                                "w-2 h-2 rounded-full",
+                                getStatusColor(report.status)
+                              )}
+                            />
+                            <span className="text-sm text-muted-foreground">
+                              {report.status}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {report.createdBy}
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {report.createdAt}
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {report.lastModified}
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {/* Empty State */}
-      {filteredReports.length === 0 && (
-        <div className="text-center py-8 text-muted-foreground">
-          No reports found matching the current filters.
-        </div>
-      )}
+        {/* Empty State */}
+        {filteredReports.length === 0 && (
+          <div className="text-center py-8 text-muted-foreground">
+            No reports found matching the current filters.
+          </div>
+        )}
+      </div>
     </div>
   );
 }
