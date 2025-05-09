@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 export default function Reports() {
-  const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+  const [viewMode, setViewMode] = useState<"grid" | "table">("table");
   const [selectedType, setSelectedType] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
 
