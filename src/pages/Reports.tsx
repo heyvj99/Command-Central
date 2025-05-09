@@ -4,6 +4,7 @@ import { LayoutGrid, Table } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Reports() {
   const [viewMode, setViewMode] = useState<"grid" | "table">("table");
@@ -44,6 +45,21 @@ export default function Reports() {
       selectedStatus === "All" || report.status === selectedStatus;
     return typeMatch && statusMatch;
   });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -94,116 +110,134 @@ export default function Reports() {
       </div>
 
       {/* Content */}
-      {viewMode === "grid" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredReports.map((report) => (
-            <Card
-              key={report.id}
-              className="p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="space-y-2">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-semibold">{report.title}</h3>
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className={cn(
-                        "w-2 h-2 rounded-full",
-                        getStatusColor(report.status)
-                      )}
-                    />
-                    <span className="text-sm text-muted-foreground">
-                      {report.status}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {report.description}
-                </p>
-                <div className="flex justify-between items-center text-sm">
-                  <span
-                    className={cn(
-                      "px-2 py-1 rounded-full",
-                      getTypeStyles(report.type)
-                    )}
-                  >
-                    {report.type}
-                  </span>
-                  <span className="text-muted-foreground">
-                    {report.createdAt}
-                  </span>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <div className="border rounded-lg">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b bg-muted/50">
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Title
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Status
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Created By
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Created At
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  Last Modified
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredReports.map((report) => (
-                <tr key={report.id} className="border-b hover:bg-muted/50">
-                  <td className="px-4 py-3">
-                    <div>
-                      <div className="font-medium">{report.title}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {report.description}
+      <AnimatePresence mode="wait">
+        {viewMode === "grid" ? (
+          <motion.div
+            key="grid"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            {filteredReports.map((report) => (
+              <motion.div key={report.id} variants={itemVariants} layout>
+                <Card className="p-4 hover:shadow-md transition-shadow">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-semibold">{report.title}</h3>
+                      <div className="flex items-center gap-1.5">
+                        <span
+                          className={cn(
+                            "w-2 h-2 rounded-full",
+                            getStatusColor(report.status)
+                          )}
+                        />
+                        <span className="text-sm text-muted-foreground">
+                          {report.status}
+                        </span>
                       </div>
                     </div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={cn(
-                        "px-2 py-1 rounded-full text-xs",
-                        getTypeStyles(report.type)
-                      )}
-                    >
-                      {report.type}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5">
+                    <p className="text-sm text-muted-foreground">
+                      {report.description}
+                    </p>
+                    <div className="flex justify-between items-center text-sm">
                       <span
                         className={cn(
-                          "w-2 h-2 rounded-full",
-                          getStatusColor(report.status)
+                          "px-2 py-1 rounded-full",
+                          getTypeStyles(report.type)
                         )}
-                      />
-                      <span className="text-sm text-muted-foreground">
-                        {report.status}
+                      >
+                        {report.type}
+                      </span>
+                      <span className="text-muted-foreground">
+                        {report.createdAt}
                       </span>
                     </div>
-                  </td>
-                  <td className="px-4 py-3 text-sm">{report.createdBy}</td>
-                  <td className="px-4 py-3 text-sm">{report.createdAt}</td>
-                  <td className="px-4 py-3 text-sm">{report.lastModified}</td>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="table"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="border rounded-lg"
+          >
+            <table className="w-full">
+              <thead>
+                <tr className="border-b bg-muted/50">
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Title
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Type
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Status
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Created By
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Created At
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    Last Modified
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {filteredReports.map((report) => (
+                  <motion.tr
+                    key={report.id}
+                    variants={itemVariants}
+                    layout
+                    className="border-b hover:bg-muted/50"
+                  >
+                    <td className="px-4 py-3">
+                      <div>
+                        <div className="font-medium">{report.title}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {report.description}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={cn(
+                          "px-2 py-1 rounded-full text-xs",
+                          getTypeStyles(report.type)
+                        )}
+                      >
+                        {report.type}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1.5">
+                        <span
+                          className={cn(
+                            "w-2 h-2 rounded-full",
+                            getStatusColor(report.status)
+                          )}
+                        />
+                        <span className="text-sm text-muted-foreground">
+                          {report.status}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-sm">{report.createdBy}</td>
+                    <td className="px-4 py-3 text-sm">{report.createdAt}</td>
+                    <td className="px-4 py-3 text-sm">{report.lastModified}</td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Empty State */}
       {filteredReports.length === 0 && (
