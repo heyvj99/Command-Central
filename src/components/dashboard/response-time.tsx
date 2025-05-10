@@ -23,13 +23,13 @@ const chartData = [
   { month: "March", currentYear: 237, previousYear: 120 },
   { month: "April", currentYear: 73, previousYear: 190 },
   { month: "May", currentYear: 209, previousYear: 130 },
-  { month: "June", currentYear: 214, previousYear: 140 },
-  { month: "July", currentYear: 214, previousYear: 140 },
-  { month: "August", currentYear: 214, previousYear: 140 },
-  { month: "September", currentYear: 214, previousYear: 140 },
-  { month: "October", currentYear: 214, previousYear: 140 },
-  { month: "November", currentYear: 214, previousYear: 140 },
-  { month: "December", currentYear: 214, previousYear: 140 },
+  { month: "June", currentYear: 214, previousYear: 130 },
+  { month: "July", currentYear: 134, previousYear: 112 },
+  { month: "August", currentYear: 154, previousYear: 154 },
+  { month: "September", currentYear: 140, previousYear: 123 },
+  { month: "October", currentYear: 125, previousYear: 156 },
+  { month: "November", currentYear: 135, previousYear: 132 },
+  { month: "December", currentYear: 139, previousYear: 123 },
 ];
 
 const chartConfig = {

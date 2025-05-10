@@ -53,7 +53,7 @@ export default function BarGraph() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Stacked + Legend</CardTitle>
+        <CardTitle>Area-wise Response Time</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>

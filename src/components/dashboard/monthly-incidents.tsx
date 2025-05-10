@@ -44,7 +44,7 @@ export function MonthlyIncidents() {
   return (
     <Card className="card-container h-[500px] flex flex-col">
       <CardHeader className="shrink-0">
-        <CardTitle>Bar Chart - Label</CardTitle>
+        <CardTitle>Monthly Incidents</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 min-h-0">
