@@ -121,8 +121,13 @@ export default function Reports() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-full overflow-y-auto pr-2"
             >
               {filteredReports.map((report) => (
-                <motion.div key={report.id} variants={itemVariants} layout>
-                  <Card className="p-4 hover:shadow-md transition-shadow">
+                <motion.div
+                  key={report.id}
+                  variants={itemVariants}
+                  layout
+                  className="h-full"
+                >
+                  <Card className="p-4 hover:shadow-md transition-shadow h-full">
                     <div className="space-y-2">
                       <div className="flex justify-between items-start">
                         <h3 className="font-semibold">{report.title}</h3>
@@ -169,7 +174,7 @@ export default function Reports() {
             >
               <div className="overflow-y-auto">
                 <table className="w-full">
-                  <thead className="sticky top-0 bg-muted/50 z-10">
+                  <thead className="sticky top-0 bg-muted/100 z-10">
                     <tr className="border-b">
                       <th className="px-4 py-3 text-left text-sm font-medium">
                         Title
