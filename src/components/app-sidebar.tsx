@@ -18,15 +18,16 @@ import { cn } from "@/lib/utils";
 // Menu items.
 const items = [
   {
-    title: "Dashboard",
-    url: "/Dashboard",
-    icon: ChartLine,
-  },
-  {
     title: "Incident Management",
     url: "/",
     icon: Siren,
   },
+  {
+    title: "Dashboard",
+    url: "/Dashboard",
+    icon: ChartLine,
+  },
+
   {
     title: "AI Assistant",
     url: "/AIAssistant",
