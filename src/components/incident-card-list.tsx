@@ -39,7 +39,10 @@ export function IncidentCardList({
   return (
     <div className="flex flex-col h-full">
       {/* Controls */}
-      <div className="flex items-center justify-between mb-4 shrink-0">
+      <div className="flex flex-col items-start justify-start gap-1 mb-4 shrink-0">
+        <div className="text-xl text-gray-700">
+          {filteredAndSortedIncidents.length} incidents
+        </div>
         <div className="flex items-center gap-4">
           <select
             className="px-3 py-1 border rounded-md bg-background text-sm"
@@ -63,9 +66,6 @@ export function IncidentCardList({
             <option value="Medium">Medium Severity</option>
             <option value="Low">Low Severity</option>
           </select>
-        </div>
-        <div className="text-sm text-muted-foreground">
-          {filteredAndSortedIncidents.length} incidents
         </div>
       </div>
 

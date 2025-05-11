@@ -99,7 +99,7 @@ export function ResourceFilterBar({
       {selectedResources.length > 0 && (
         <button
           onClick={onClearAll}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+          className="w-fit whitespace-nowrap shrink-0 flex items-center gap-1 px-2 py-1.5 rounded-full text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-200 transition-colors"
         >
           <X className="w-4 h-4" />
           <span>Clear All</span>
